@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ابدأ الآن - GiveAdd</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Cairo,sans-serif;
+        }
+
+        body{
+            background:#0f172a;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .container{
+            width:90%;
+            max-width:800px;
+            text-align:center;
+        }
+
+        h1{
+            margin-bottom:40px;
+            font-size:40px;
+        }
+
+        .cards{
+            display:flex;
+            gap:20px;
+            flex-wrap:wrap;
+            justify-content:center;
+        }
+
+        .card{
+            background:#1e293b;
+            padding:30px;
+            border-radius:20px;
+            width:300px;
+            transition:0.3s;
+        }
+
+        .card:hover{
+            transform:translateY(-5px);
+        }
+
+        .card h2{
+            margin-bottom:15px;
+        }
+
+        .card p{
+            color:#cbd5e1;
+            margin-bottom:20px;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:12px 25px;
+            border-radius:10px;
+            text-decoration:none;
+            color:white;
+            background:#2563eb;
+        }
+
+        .btn:hover{
+            background:#1d4ed8;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>ماذا تريد؟</h1>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>نشر إعلان</h2>
+
+            <p>
+                قم بنشر إعلانك والوصول إلى آلاف المستخدمين بسهولة.
+            </p>
+
+            <a href="publish.html" class="btn">
+                نشر إعلان
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>الربح من الإعلانات</h2>
+
+            <p>
+                شاهد الإعلانات يوميًا واحصل على أرباح مقابل التفاعل.
+            </p>
+
+            <a href="earn.html" class="btn">
+                ابدأ الربح
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

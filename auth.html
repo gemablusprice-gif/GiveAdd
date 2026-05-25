@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>تسجيل الدخول - GiveAdd</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    background:#0f172a;
+    color:white;
+    font-family:Cairo;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+}
+
+.box{
+    background:#1e293b;
+    padding:40px;
+    border-radius:20px;
+    width:90%;
+    max-width:400px;
+    text-align:center;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.google{
+    background:white;
+    color:black;
+    font-weight:bold;
+}
+
+.email{
+    background:#2563eb;
+    color:white;
+}
+
+.back{
+    margin-top:20px;
+    display:block;
+    color:#60a5fa;
+    text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>تسجيل الدخول</h2>
+
+<!-- زر Google الحقيقي -->
+<button class="google" onclick="googleLogin()">
+تسجيل بواسطة Google
+</button>
+
+<!-- البريد الإلكتروني -->
+<button class="email" onclick="window.location.href='login.html'">
+تسجيل بواسطة البريد الإلكتروني
+</button>
+
+<a class="back" href="index.html">العودة للرئيسية</a>
+
+</div>
+
+<!-- Firebase Script -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { 
+getAuth, 
+GoogleAuthProvider, 
+signInWithPopup 
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+// 🔥 Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyCTmzHb8RxxNeWKdMMcb9ThOW5LLLkzzxo",
+  authDomain: "giveadd-d3362.firebaseapp.com",
+  projectId: "giveadd-d3362",
+  storageBucket: "giveadd-d3362.firebasestorage.app",
+  messagingSenderId: "544069122993",
+  appId: "1:544069122993:web:507c018c7f4cde87b35b90",
+  measurementId: "G-T7B61HBD9B"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// 🌟 Google Login Function
+window.googleLogin = async function () {
+    try {
+        const result = await signInWithPopup(auth, provider);
+
+        const user = result.user;
+
+        alert("تم تسجيل الدخول بـ Google ✅");
+
+        console.log("User:", user);
+
+        // تحويل لصفحة المستخدم
+        window.location.href = "profile.html";
+
+    } catch (error) {
+        alert("خطأ: " + error.message);
+    }
+};
+</script>
+
+</body>
+</html>
