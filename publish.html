@@ -2,97 +2,311 @@
 <html lang="ar" dir="rtl">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نشر إعلان - GiveAdd</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نشر إعلان - GiveAdd</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<style>
+    <style>
+        /* إعدادات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Cairo,sans-serif;
-}
+        body {
+            background: #0f172a; /* خلفية داكنة مريحة للعين */
+            color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
 
-body{
-    background:#0f172a;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    padding:20px;
-}
+        /* حاوية النموذج */
+        .form-box {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+            border: 1px solid #334155;
+        }
 
-.form-box{
-    background:#1e293b;
-    padding:40px;
-    border-radius:20px;
-    width:100%;
-    max-width:500px;
-}
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #f1f5f9;
+        }
 
-h1{
-    text-align:center;
-    margin-bottom:30px;
-}
+        p.subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
 
-input,
-textarea{
-    width:100%;
-    padding:15px;
-    margin-bottom:20px;
-    border:none;
-    border-radius:10px;
-    background:#334155;
-    color:white;
-}
+        /* عناصر الإدخال */
+        .input-group {
+            margin-bottom: 24px;
+        }
 
-textarea{
-    resize:none;
-    height:120px;
-}
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #cbd5e1;
+        }
 
-button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    background:#2563eb;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-}
+        input[type="text"],
+        input[type="url"],
+        textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #334155;
+            border-radius: 12px;
+            background: #0f172a;
+            color: white;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
 
-button:hover{
-    background:#1d4ed8;
-}
+        input:focus, textarea:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }
 
-</style>
+        textarea {
+            resize: none;
+            height: 140px;
+        }
+
+        /* منطقة رفع الملفات المتقدمة */
+        .upload-container {
+            border: 2px dashed #475569;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            background: #111827;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .upload-container:hover {
+            border-color: #3b82f6;
+            background: #1e293b;
+        }
+
+        .upload-container input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-icon {
+            font-size: 32px;
+            color: #3b82f6;
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .upload-text span {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        /* منطقة المعاينة للملفات المرفوعة */
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 115px));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 115px;
+            height: 115px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0f172a;
+            border: 1px solid #334155;
+        }
+
+        .preview-item img, 
+        .preview-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* زر الحذف فوق الصورة/الفيديو */
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .delete-btn:hover {
+            background: rgb(220, 38, 38);
+        }
+
+        /* زر الإرسال */
+        button[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        button[type="submit"]:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="form-box">
+    <h1>نشر إعلان جديد</h1>
+    <p class="subtitle">قم بملء البيانات التالية لتجهيز إعلانك وإطلاقه للجمهور</p>
 
-<h1>نشر إعلان جديد</h1>
+    <form onsubmit="publish(event)">
+        
+        <div class="input-group">
+            <label>عنوان الإعلان</label>
+            <input type="text" placeholder="مثال: شقة فاخرة للبيع في وسط المدينة" required>
+        </div>
 
-<form>
+        <div class="input-group">
+            <label>رابط الإعلان (اختياري)</label>
+            <input type="url" placeholder="https://example.com/my-ad">
+        </div>
 
-<input type="text" placeholder="عنوان الإعلان">
+        <div class="input-group">
+            <label>وصف الإعلان</label>
+            <textarea placeholder="اكتب تفاصيل الإعلان ومميزاته هنا..." required></textarea>
+        </div>
 
-<input type="url" placeholder="رابط الإعلان">
+        <div class="input-group">
+            <label>الوسائط (صور وفيديوهات)</label>
+            <div class="upload-container">
+                <div class="upload-icon">📁</div>
+                <div class="upload-text">اسحب وأفلت الملفات هنا أو <span>تصفح جهازك</span></div>
+                <input type="file" id="files" accept="image/*,video/*" multiple>
+            </div>
+        </div>
 
-<textarea placeholder="وصف الإعلان"></textarea>
+        <div class="preview-grid" id="preview"></div>
 
-<button type="submit">
-نشر الإعلان
-</button>
-
-</form>
-
+        <button type="submit">نشر الإعلان الآن 🚀</button>
+    </form>
 </div>
+
+<script>
+    const fileInput = document.getElementById("files");
+    const previewContainer = document.getElementById("preview");
+
+    fileInput.addEventListener("change", function(e) {
+        let files = Array.from(e.target.files);
+
+        files.forEach(file => {
+            let url = URL.createObjectURL(file);
+
+            // إنشاء الحاوية الخاصة بكل ملف مرفوع
+            let item = document.createElement("div");
+            item.className = "preview-item";
+
+            let mediaElement;
+
+            // التحقق من نوع الملف (صورة أم فيديو)
+            if (file.type.startsWith("image")) {
+                mediaElement = document.createElement("img");
+                mediaElement.src = url;
+            } else if (file.type.startsWith("video")) {
+                mediaElement = document.createElement("video");
+                mediaElement.src = url;
+                mediaElement.muted = true; // صامت افتراضياً داخل المعاينة
+                mediaElement.autoplay = false;
+                mediaElement.controls = true; // تمكين أزرار التحكم بالفيديو
+            }
+
+            // زر الحذف المتطور
+            let deleteBtn = document.createElement("button");
+            deleteBtn.innerHTML = "×";
+            deleteBtn.className = "delete-btn";
+            deleteBtn.type = "button"; // لمنع إرسال النموذج عند الضغط عليه
+
+            deleteBtn.onclick = () => {
+                item.remove();
+                // تنظيف الذاكرة من الرابط المؤقت
+                URL.revokeObjectURL(url);
+            };
+
+            // تركيب العناصر داخل عنصر المعاينة
+            item.appendChild(mediaElement);
+            item.appendChild(deleteBtn);
+            previewContainer.appendChild(item);
+        });
+
+        // تفريغ قيمة الحقل ليتيح رفع نفس الملفات مجدداً إذا تم حذفها
+        fileInput.value = "";
+    });
+
+    // دالة النشر عند الضغط على زر الإرسال الأساسي للنموذج
+    function publish(event) {
+        event.preventDefault(); // منع الصفحة من إعادة التحميل
+        alert("تم إنشاء الإعلان بنجاح 🚀");
+    }
+</script>
 
 </body>
 </html>
